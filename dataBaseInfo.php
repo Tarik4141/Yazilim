@@ -1,6 +1,6 @@
 <?php 
-$servername = "localhost";         
-$user = "root";           
-$pass = "";     
-$dbname = "yazilimdb";
+    $servername = "localhost";         
+    $user = "root";           
+    $pass = "toor";     
+    $dbname = "yazilimdb";
 ?>
