@@ -178,7 +178,26 @@
       </div>
     </div>
   </div>
+  <!-- Delete Modal-->
+  <div class="modal fade" id="myModalDelete">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+      <div class="modal-content">
 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Bölüm Sil</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form action="insertDepartment.php" method="post">
+                  Bu bölümü silmek istediğinize emin misiniz ?
+            <button type="button" class="btn btn-primary">Hayır</button>
+            <button type="submit" class="btn btn-primary">Evet</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-
 </html>
