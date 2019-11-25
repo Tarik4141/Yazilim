@@ -24,14 +24,14 @@ $leftMenu = '<div id="Header">
               <span class="brand-text font-weight-light" style="vertical-align:middle;">' . $_SESSION['glbAdmin']['kullaniciAdi'] . '</span>
           </a>
   
-         <a href="anaSayfa.php" class="list-group-item list-group-item-action renk">Ana Sayfa</a>
-         <a href="kullaniciEkle.php" class="list-group-item list-group-item-action ">Kullanıcılar</a>
-         <a href="BolumEkleme.php" class="list-group-item list-group-item-action ">Bölümler</a>
-         <a href="donemler.php" class="list-group-item list-group-item-action ">Dönemler</a>
-         <a href="fakulteler.php" class="list-group-item list-group-item-action ">Fakülteler</a>
-         <a href="dersler.php" class="list-group-item list-group-item-action ">Dersler</a>
-         <a href="dersAtama.php" class="list-group-item list-group-item-action ">Ders Atama</a>   	 
-         <a href="#" class="list-group-item list-group-item-action ">Test Okut</a>
+         <a href="anaSayfa.php" class="list-group-item list-group-item-action ek">Optik Okuyucu</a>
+         <a href="kullaniciEkle.php" class="list-group-item list-group-item-action ek">Kullanıcılar</a>
+         <a href="BolumEkleme.php" class="list-group-item list-group-item-action ek">Bölümler</a>
+         <a href="donemler.php" class="list-group-item list-group-item-action ek">Dönemler</a>
+         <a href="fakulteler.php" class="list-group-item list-group-item-action ek">Fakülteler</a>
+         <a href="dersler.php" class="list-group-item list-group-item-action ek">Dersler</a>
+         <a href="dersAtama.php" class="list-group-item list-group-item-action ek">Ders Atama</a>   	 
+         
          
 </div>';
 

@@ -110,6 +110,10 @@ body{
 .list-group-item{
 	background-color:#464648!important;
 }
+.ek:hover{
+	background-color:#DADBDD!important;
+	color:black!important;
+}
 .list-group-item-action{
 	color:white!important;
 }
