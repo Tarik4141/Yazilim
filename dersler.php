@@ -55,7 +55,7 @@
                           <td class="status--process">' . $ders["dersAdi"] . '</td>
                           <td>' . $ders["bolumAdi"] . '</td>
                           <td>
-                            <button class="au-btn au-btn-icon au-btn--darkseagreen au-btn--small" data-toggle="modal" data-target="">
+                            <button onclick="showKazanim(`'.$ders["dersKazanim"].'`)" class="au-btn au-btn-icon au-btn--darkseagreen au-btn--small" data-toggle="modal" data-target="#modalDersKazanim">
                               Göster
                             </button>
                           </td>
@@ -89,6 +89,9 @@
                   function deleteLecture(dersKodu,dersAdi) {
                     document.getElementById("deleteLectureID").value = dersKodu;
                     document.getElementById("whichLecture").innerHTML = dersAdi;
+                  }
+                  function showKazanim(kazanim) {
+                    document.getElementById("showDersKazanimID").innerHTML = kazanim;
                   }
                 </script>
               </tbody>
@@ -205,6 +208,25 @@
           </form>
           <form>
             <button type="close" class="btn btn-info">Hayır</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modalDersKazanim">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Ders Kazanımları</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <label id="showDersKazanimID"></label>
+          <form>
+            <button type="close" class="btn btn-info">Tamam</button>
           </form>
         </div>
       </div>

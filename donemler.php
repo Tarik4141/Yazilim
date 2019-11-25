@@ -108,7 +108,7 @@
                 <div class="modal-body">
                     <form action="insertDonem.php" method="post">
                         <div class="form-group">
-                            <label><b>Dönem No:</b></label>
+                            <label><b>Dönem Kodu:</b></label>
                             <input type="text" class="form-control" name="donemId">
                         </div>
                         <div class="form-group">

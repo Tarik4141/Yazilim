@@ -26,7 +26,7 @@
     include "leftMenu.php";
     include "dataBaseInfo.php";
     $conn = new mysqli($servername, $user, $pass, $dbname);
-    $query = "select bolumNo,bolumAdi,(select fakulteAdi from fakulte where fakulteNo = bolum.fakulteNo) as fakulteAdi from bolum";
+    $query = "select bolumNo,bolumAdi,bolumKazanim,(select fakulteAdi from fakulte where fakulteNo = bolum.fakulteNo) as fakulteAdi from bolum";
     $result = $conn->query($query);
     echo $leftMenu;
     ?>
@@ -62,7 +62,7 @@
                 
                 <td>' . $bolum["fakulteAdi"] . '</td>
                 
-                <td><button class="au-btn au-btn-icon au-btn--darkseagreen au-btn--small" data-toggle="modal" data-target="">Göster</button></td>
+                <td><button onclick="showKazanim(`'.$bolum["bolumKazanim"].'`)" class="au-btn au-btn-icon au-btn--darkseagreen au-btn--small" data-toggle="modal" data-target="#modalKazanim">Göster</button></td>
                 <td>
                   <div class="table-data-feature">
                     <button onclick="depEdit(' . $bolum["bolumNo"] . ',`' . ($bolum["bolumAdi"]) . '`,`' . $bolum["fakulteAdi"] . '`)" data-target="#myModalDepEdit" data-toggle="modal" class="item" data-toggle="tooltip" data-placement="top" title="Güncelle" data-original-title="Edit">
@@ -92,6 +92,10 @@
                   function deleteDepartment(bolumAdi) {
                     document.getElementById("deleteBolumAdiID").value = bolumAdi;
                     document.getElementById("whichDep").innerHTML = bolumAdi;
+                  }
+
+                  function showKazanim(kazanim) {
+                    document.getElementById("showBolumKazanimID").innerHTML = kazanim;
                   }
                 </script>
               </tbody>
@@ -136,7 +140,7 @@
             </div>
             <div class="form-group">
               <label><b>Kazanımları:</b></label>
-              <textarea id="bolumKazanimID" class="md-textarea form-control" rows="8"></textarea>
+              <textarea id="bolumKazanimID" class="md-textarea form-control" rows="8" name = "bolumKazanim"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Ekle</button>
           </form>
@@ -157,7 +161,7 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="" method="post">
+          <form action="editDepartment.php" method="post">
             <div class="form-group">
               <label><b>Bölüm No:</b></label>
               <input id="oldBolumNoID" type="hidden" class="form-control" name="oldBolumNo" value="">
@@ -205,6 +209,26 @@
           </form>
           <form>
             <button type="close" class="btn btn-info">Hayır</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalKazanim">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Bölüm Kazanımları</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <label id="showBolumKazanimID"></label>
+          <form>
+            <button type="close" class="btn btn-info">Tamam</button>
           </form>
         </div>
       </div>
