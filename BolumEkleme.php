@@ -68,7 +68,7 @@
                     <button onclick="depEdit(' . $bolum["bolumNo"] . ',`' . ($bolum["bolumAdi"]) . '`,`' . $bolum["fakulteAdi"] . '`)" data-target="#myModalDepEdit" data-toggle="modal" class="item" data-toggle="tooltip" data-placement="top" title="Güncelle" data-original-title="Edit">
                       <i class="zmdi zmdi-edit"></i>
                     </button>
-                    <button class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
+                    <button onclick="deleteDepartment(`' . ($bolum["bolumAdi"]) . '`)" data-target = "#myModalDelete" data-toggle="modal" class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
                       <i class="zmdi zmdi-delete"></i>
                     </button>
                   </div>
@@ -77,7 +77,7 @@
               <tr class="spacer"></tr>';
                 }
                 ?>
-                 <script>
+                <script>
                   function depEdit(bolumNo, bolumAdi, fakulteAdi) {
                     getDepName(bolumNo, bolumAdi, fakulteAdi);
                   }
@@ -87,6 +87,11 @@
                     document.getElementById("oldBolumNoID").value = bolumNo;
                     document.getElementById("bolumAdiID").value = bolumAdi;
                     document.getElementById("editFacultyName").value = fakulteAdi;
+                  }
+
+                  function deleteDepartment(bolumAdi) {
+                    document.getElementById("deleteBolumAdiID").value = bolumAdi;
+                    document.getElementById("whichDep").innerHTML = bolumAdi;
                   }
                 </script>
               </tbody>
@@ -120,15 +125,18 @@
             <div class="form-group">
               <label for="exampleFormControlSelect1">Fakülte:</label>
               <select class="form-control" name="fakulteAdi">
-                <?php 
-                  $fakulte_query = "select * from fakulte;";
-                  $fakulte_result = $conn->query($fakulte_query);
-                  while($fakulteler = mysqli_fetch_array($fakulte_result))
-                  {
-                    echo '<option>'.$fakulteler['fakulteAdi'].'</option>';
-                  }
+                <?php
+                $fakulte_query = "select * from fakulte;";
+                $fakulte_result = $conn->query($fakulte_query);
+                while ($fakulteler = mysqli_fetch_array($fakulte_result)) {
+                  echo '<option>' . $fakulteler['fakulteAdi'] . '</option>';
+                }
                 ?>
               </select>
+            </div>
+            <div class="form-group">
+              <label><b>Kazanımları:</b></label>
+              <textarea id="bolumKazanimID" class="md-textarea form-control" rows="8"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Ekle</button>
           </form>
@@ -136,8 +144,8 @@
       </div>
     </div>
   </div>
-<!--Department Edit Modal -->
-<div class="modal fade" id="myModalDepEdit">
+  <!--Department Edit Modal -->
+  <div class="modal fade" id="myModalDepEdit">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
       <div class="modal-content">
 
@@ -162,13 +170,12 @@
             <div class="form-group">
               <label>Fakülte:</label>
               <select class="form-control" name="fakulteAdi" id="editFacultyName">
-                <?php 
-                  $fakulte_query = "select * from fakulte;";
-                  $fakulte_result = $conn->query($fakulte_query);
-                  while($fakulteler = mysqli_fetch_array($fakulte_result))
-                  {
-                    echo '<option>'.$fakulteler['fakulteAdi'].'</option>';
-                  }
+                <?php
+                $fakulte_query = "select * from fakulte;";
+                $fakulte_result = $conn->query($fakulte_query);
+                while ($fakulteler = mysqli_fetch_array($fakulte_result)) {
+                  echo '<option>' . $fakulteler['fakulteAdi'] . '</option>';
+                }
                 ?>
               </select>
             </div>
@@ -190,14 +197,19 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="insertDepartment.php" method="post">
-                  Bu bölümü silmek istediğinize emin misiniz ?
-            <button type="button" class="btn btn-primary">Hayır</button>
-            <button type="submit" class="btn btn-primary">Evet</button>
+          <label id="whichDep"></label>
+          bölümünü silmek istediğinize emin misiniz ?
+          <form action="deleteDepartment.php" method="post">
+            <button type="submit" class="btn btn-danger">Evet</button>
+            <input id="deleteBolumAdiID" type="hidden" class="form-control" name="bolumAdi" value="">
+          </form>
+          <form>
+            <button type="close" class="btn btn-info">Hayır</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 </body>
+
 </html>

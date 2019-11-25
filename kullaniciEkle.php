@@ -71,7 +71,7 @@
               <button onclick="userEdit(' . $ogretimUye["sicilNo"] . ',`' . ($ogretimUye["adi"]) . '`,`' . $ogretimUye["soyadi"] . '`,`' . $ogretimUye["sifre"] . '`)" type="submit" data-target="#myModalUserEdit" data-toggle="modal" class="item" data-placement="top" title="Güncelle" data-original-title="Edit">
                 <i class="zmdi zmdi-edit"></i>
               </button>
-          <button onclick="getUserName()" data-target="#myModalUserEdit" data-toggle="modal" class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
+          <button onclick="deleteUser('.$ogretimUye["sicilNo"].',`'.$ogretimUye["adi"].'`,`'.$ogretimUye["soyadi"].'`)" data-target="#myModalDeleteUser" data-toggle="modal" class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
             <i class="zmdi zmdi-delete"></i>
           </button>
         </div>
@@ -91,6 +91,11 @@
                     document.getElementById("adiID").value = adi;
                     document.getElementById("soyadiID").value = soyadi;
                     document.getElementById("sifreID").value = sifre;
+                  }
+                  function deleteUser(sicilNo,adi,soyadi)
+                  {
+                    document.getElementById("deleteUserID").value = sicilNo;
+                    document.getElementById("whichUserName").innerHTML = adi + " " + soyadi;
                   }
                 </script>
               </tbody>
@@ -172,6 +177,29 @@
       </div>
     </div>
   </div>
-</body>
+  <div class="modal fade" id="myModalDeleteUser">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+      <div class="modal-content">
 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Kullanıcı Sil</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+        <label id="whichUserName"></label>
+         adlı kullanıcıyı silmek istediğinize emin misiniz?
+          <form action="deleteUser.php" method="post">
+            <button type="submit" class="btn btn-danger">Evet</button>
+            <input id="deleteUserID" type="hidden" class="form-control" name="sicilNo" value="">
+          </form>
+          <form> 
+              <button type="close" class="btn btn-info">Hayır</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
