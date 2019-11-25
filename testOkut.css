@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+
+
+
+@media only screen and (min-width:1200px){
+	#testOkutma{
+		padding:120px 300px;
+	
+	}
+}
+
+@media only screen and (min-width:992px) and (max-width:1199px){
+	#testOkutma{
+		padding:120px 150px;
+	}
+}
+
+@media only screen and (min-width:768px) and (max-width:991px){
+	#testOkutma{
+		padding:120px 50px;
+	}
+}
+
+@media only screen and (min-width:576px) and (max-width:767px){ /* S */
+	#testOkutma{
+		padding:120px 70px;
+	}
+}
+
+@media only screen and (max-width:576px){ /* XS */
+	#testOkutma{
+		padding:120px 50px;
+	}
+}
+
+.sel1{
+	margin-bottom:15px;
+}

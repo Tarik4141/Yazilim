@@ -558,42 +558,9 @@ legend{
 	color:#212529;
 	text-align:center;
 }
-.buton{
-	display: block;
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    height: 35px;
-    min-height: 35px;
-    max-height: 35px;
-    margin: 0 auto;
-    margin-top: 5px;
-    padding: 0;
-    overflow: hidden;
-    border: none;
-    outline: none;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -o-border-radius: 3px;
-    -ms-border-radius: 3px;
-    border-radius: 3px;
-    background-color: #dee2e6;
-	color:black;
-	font-weight:bold;
-    text-align: center;
-    vertical-align: top;
-    cursor: pointer;
-	transition:all 200ms ease-in-out;
-}
 
 
-.btn{
-	float:right;
-	margin-top:15px;
-	background-color:#dee2e6;
-	color:#212529;
-	
-}
+
 .form-group{
 	font-weight:bold;
 }
