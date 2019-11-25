@@ -103,14 +103,23 @@ body{
   outline:none;
   z-index:1038;
   overflow-y: hidden;
+  background-color:#464648;
+  color:white;
     
 }
-	
+.list-group-item{
+	background-color:#464648!important;
+}
+.list-group-item-action{
+	color:white!important;
+}
+
 @media (max-width: 768px) {
   #yanSekme {
     display:none;
   }
 }
+
 
 #Header{
 	
