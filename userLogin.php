@@ -32,21 +32,19 @@
     {
       $username = $_POST["username"];
       $password = $_POST["password"];                
-
-      $conn = new mysqli($servername,$user,$pass,$dbname);
       
       if ($conn->connect_error)
       {
           die("Connection failed: " . $conn->connect_error);
       }
-      $query = "select * from ogretimUye where adi = '$username' and sifre = '$password'"; 
+      $query = "select * from ogretimUye where sicilNo = '$username' and sifre = '$password'"; 
       $result = $conn->query($query);
       $response = mysqli_fetch_assoc($result);
       if($result->num_rows > 0)
       {
         session_start();
           $_SESSION["glbUser"] = $response;
-          header("Location: BolumEkleme.php");
+          header("Location: anaSayfa.php");
       }
       else
       {

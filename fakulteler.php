@@ -26,7 +26,7 @@
         include "leftMenu.php";
         include "dataBaseInfo.php";
         $conn = new mysqli($servername, $user, $pass, $dbname);
-        $query = "select * from fakulte";
+        $query = "select fakulteNo,fakulteAdi,(select GROUP_CONCAT(bolumAdi SEPARATOR ' - ') as Bolumler from bolum where fakulteNo=fakulte.fakulteNo) as departments from fakulte;";
         $result = $conn->query($query);
         echo $leftMenu;
         ?>
@@ -58,10 +58,7 @@
                                     <tr class="tr-shadow">
                                         <td>' . $fakulte["fakulteNo"] . '</td>
                                         <td class="status--process"> ' . $fakulte["fakulteAdi"] . ' </td>
-                                        <form method="get" action="fakulteler.php">
-                                            <input type = "hidden" name="fakulteAdi" value="' . $fakulte["fakulteAdi"] . '">
-                                        </form>
-                                            <td><button class="au-btn au-btn-icon au-btn--darkseagreen au-btn--small" data-toggle="modal" data-target="#modalShowDepartments">Göster</button></td>
+                                            <td><button onclick="showDepartments(`'.$fakulte["departments"].'`)" class="au-btn au-btn-icon au-btn--darkseagreen au-btn--small" data-toggle="modal" data-target="#modalShowDepartments">Göster</button></td>
                                         <td>
                                             <div class="table-data-feature">
                                                 <button onclick="facultyEdit(' . $fakulte["fakulteNo"] . ',`' . $fakulte["fakulteAdi"] . '`)" data-target="#modalEditFaculty" data-toggle="modal" class="item" data-toggle="tooltip" data-placement="top" title="Güncelle" data-original-title="Edit">
@@ -90,6 +87,10 @@
                                     function deleteFaculty(fakulteNo, fakulteAdi) {
                                         document.getElementById("deleteFacultyID").value = fakulteNo;
                                         document.getElementById("whichFaculty").innerHTML = fakulteAdi;
+                                    }
+                                    function showDepartments(departments)
+                                    {
+                                        document.getElementById("showDepID").innerHTML = departments;
                                     }
                                 </script>
                             </tbody>
@@ -194,34 +195,8 @@
                     <div class="col-md-12">
                         <div class="table-data__tool">
                             <div class="table-data__tool-right">
+                            <label id="showDepID"></label>
                             </div>
-                        </div>
-                        <div class="table-responsive table-responsive-data2">
-                            <table id="TabloSinirlamaAlani" class="table table-data2">
-                                <thead>
-                                    <tr>
-                                        <th>Bölüm No</th>
-                                        <th>Bölüm Adı</th>
-                                        <th>Fakülte</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $fakulteAdi = $_GET["fakulteAdi"];
-                                    $bolumler_query = "select bolumNo,bolumAdi,(select fakulteAdi from fakulte where fakulteNo = bolum.fakulteNo) as fakulteAdi from bolum;";
-                                    $bolumler_result = $conn->query($bolumler_query);
-                                    while ($bolum = mysqli_fetch_array($bolumler_result)) {
-                                        echo '  
-                                    <tr class="tr-shadow">
-                                        <td>' . $fakulteAdi . '</td>
-                                        <td>' . $bolum["bolumAdi"] . '</td>
-                                        <td>' . $bolum["fakulteAdi"] . '</td>
-                                    </tr>
-                                    <tr class="spacer"></tr>';
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

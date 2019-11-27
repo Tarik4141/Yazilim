@@ -1,5 +1,6 @@
-<?php session_start(); ?>
+
 <?php
+session_start(); 
 $leftMenu = '<div id="Header">
 <div id="HeaderSinirlamaAlani">
     <ul id="SeceneklerAlani">
