@@ -7,7 +7,7 @@ $leftMenu = '<div id="Header">
             <a href="index.html">Çıkış</a>
         </li>
     </ul>
-    <div id="HeaderMenuAcmaButonuAlani" onClick="sekme();" >
+    <div id="HeaderMenuAcmaButonuAlani" onClick="sekme()" >
     <img src="MenuCizgileri.png" border="0" alt="MenüÇizgileri">
 </div>
 </div>

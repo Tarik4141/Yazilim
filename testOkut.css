@@ -5,32 +5,32 @@
 
 @media only screen and (min-width:1200px){
 	#testOkutma{
-		padding:120px 300px;
+		padding:50px 350px;
 	
 	}
 }
 
 @media only screen and (min-width:992px) and (max-width:1199px){
 	#testOkutma{
-		padding:120px 150px;
+		padding:50px 220px;
 	}
 }
 
 @media only screen and (min-width:768px) and (max-width:991px){
 	#testOkutma{
-		padding:120px 50px;
+		padding:50px 180px;
 	}
 }
 
 @media only screen and (min-width:576px) and (max-width:767px){ /* S */
 	#testOkutma{
-		padding:120px 70px;
+		padding:50px 130px;
 	}
 }
 
 @media only screen and (max-width:576px){ /* XS */
 	#testOkutma{
-		padding:120px 50px;
+		padding:50px 50px;
 	}
 }
 
