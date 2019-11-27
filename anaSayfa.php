@@ -22,18 +22,17 @@
 
 </head>
 
-<body>
-  <div id="TumSayfa">
+<body onresize="test()" onLoad="yenile()">
+  <div id="TumSayfa" onClick="kapat()">
 	  <?php
 include "leftMenu.php";
 echo $leftMenu;
-include "readFile.php";
-$ogrenciler = readStudents();
+
 ?>
 
     <div id="Icerik">
+		<h3 style="text-align:center; padding-top:60px; z-index:3;">OPTİK OKUTUCU</h3>
 			<div class="form-group" id="testOkutma" >
-				
  				<label  style="float:left;">Bölüm:</label>
   				<select class="form-control sel1" >
     				<option>1</option>

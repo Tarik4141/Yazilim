@@ -9,7 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" language="javascript" src="Script.js"></script>
-  <link href="ogretimUyesi.css" rel="stylesheet">
+  <link href="ogretimUyesiAnaSayfaCss.css" rel="stylesheet">
   <link href="testOkut.css" rel="stylesheet">
   
 
@@ -22,10 +22,9 @@
 
 </head>
 
-<body>
+<body onresize="test()" onLoad="yenile()">
 
- 
-    <div id="TumSayfa">
+    <div id="TumSayfa" onClick="kapat()">
 		<div id="Header1">
 	<div id="HeaderSinirlamaAlani1">
 		<div >
@@ -34,8 +33,9 @@
     			<div class="dropdown-menu dropdown-menu-right">
 					<ul class="acilirMenuUl">
       					<li class="acilirMenuItemi" style="text-align:center;"><a class="dropdown-item" href="#"><img src="avatar5.png" alt="kullanıcıLogo" class="img-circle" style="width:33px; height:33px; border-radius:50%;  line-height:1.5;"><span style="padding-left:6px;">Tarık Ahmet ERSOYLU</span></a></li>
-      					<li class="acilirMenuItemi"><a class="dropdown-item" href="#">Hesap Bilgilerim</a></li>
-      					<li class="acilirMenuItemi"><a class="dropdown-item" href="#">Dersler</a></li>
+						<li class="acilirMenuItemi"><a class="dropdown-item" href="ogretimUyesiAnaSayfaPhp.php">Ana Sayfa</a></li>
+						<li class="acilirMenuItemi"><a class="dropdown-item" href="ogretimUyesiDersBilgileriPhp.php">Dersler</a></li>
+      					<li class="acilirMenuItemi"><a class="dropdown-item" href="#">Bilgilerim</a></li>
 						<div class="dropdown-divider" style="margin:0; padding:0;"></div>
 						<li class="acilirMenuItemi"><a class="dropdown-item" href="#">Çıkış</a></li>
 					</ul>	
@@ -90,7 +90,6 @@
 				<button type="button" class="btn btn-primary" style="float:right; margin-top:20px; width:80px;">Okut</button>
 				
 			</div><br /><br />
-		<hr/>
     </div>
   </div>
   

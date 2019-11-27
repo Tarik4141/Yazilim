@@ -14,8 +14,8 @@
   <title>DERSLER</title>
 </head>
 
-<body>
-  <div id="TumSayfa">
+<body onresize="test()" onLoad="yenile()">
+  <div id="TumSayfa" onClick="kapat()">
     <?php
     include "leftMenu.php";
     include "dataBaseInfo.php";

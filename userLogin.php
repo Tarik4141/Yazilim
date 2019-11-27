@@ -46,7 +46,7 @@
       {
         session_start();
           $_SESSION["glbUser"] = $response;
-          header("Location: ogretimUyesi.php");
+          header("Location: ogretimUyesiAnaSayfaPhp.php");
       }
       else
       {

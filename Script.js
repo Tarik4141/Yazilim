@@ -3,11 +3,11 @@
 
 
 function test(){
-        if(window.innerWidth <768) {
+      if(window.innerWidth <768) {
    			
 			document.getElementById("yanSekme").style.display	=	"none";
 			
-  }else{
+     }else{
 	  document.getElementById("yanSekme").style.display	=	"block";
 	  
   }
