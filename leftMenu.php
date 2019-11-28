@@ -5,10 +5,10 @@ $leftMenu = '<div id="Header">
 <div id="HeaderSinirlamaAlani">
     <ul id="SeceneklerAlani">
         <li class="Secenekler">
-            <a href="index.html">Çıkış</a>
+            <a href="adminLogin.php">Çıkış</a>
         </li>
     </ul>
-    <div id="HeaderMenuAcmaButonuAlani" onClick="sekme();" >
+    <div id="HeaderMenuAcmaButonuAlani" onClick="sekme()" >
     <img src="MenuCizgileri.png" border="0" alt="MenüÇizgileri">
 </div>
 </div>

@@ -19,22 +19,49 @@
 	<!-- Custom styles for this template -->
 </head>
 
-<body>
+<body onload="bolumunDersleri()">
 	<script type="text/javascript">
 		<?php
 		require_once 'Script.js';
 		?>
-		function ogrenciCevaplari(file)
-		{
+		var bolumSelectionDersler = new Array();
+
+		function ogrenciCevaplari(file) {
 			readText(file);
 		}
-		function cevapAnahtari(file)
-		{
+
+		function cevapAnahtari(file) {
 			readCevapText(file);
 		}
-		function okutBtnClick()
-		{
+
+		function okutBtnClick() {
 			cevaplariOkut();
+		}
+
+		function bolumunDersleri() {
+			var dersSelection = document.getElementById("dersSelectionID").options;
+
+			for (let index = 0; index < dersSelection.length; index++) {
+				bolumSelectionDersler[index] = dersSelection[index].text.split(" - ");
+			}
+			console.log(bolumSelectionDersler);
+		}
+
+		function comboBoxOnChange() {
+			var bolumSelection = document.getElementById("bolumSelectionID");
+			var derslerSelection = document.getElementById("dersSelectionID");
+			var bolum_selection = bolumSelection.value;
+			bolum_selection = bolum_selection.split(" - ");
+			derslerSelection.length = 0;
+			for (var i = 0; i < bolumSelectionDersler.length; i++) {
+				if (bolumSelectionDersler[i][0] == bolum_selection[0]) {
+					var option = document.createElement("option");
+					option.text = bolumSelectionDersler[i][0] + " - " + bolumSelectionDersler[i][1];
+					derslerSelection.add(option);
+				} else {
+					console.log("ife girmedi");
+				}
+			}
 		}
 	</script>
 	<div id="TumSayfa">
@@ -42,26 +69,29 @@
 		include "dataBaseInfo.php";
 		include "leftMenu.php";
 		echo $leftMenu;
-		$bolum_query = "select * from bolum;";
+		$bolum_query = "select bolumNo,bolumAdi from bolum;";
 		$bolum_result = $conn->query($bolum_query);
-		$ders_query = "select * from dersAtama;";
+		$ders_query = "select dersKodu,bolumNo,(select dersAdi from dersler where dersKodu=dersAtama.dersKodu) as dersAdi from dersAtama;";
 		$ders_result = $conn->query($ders_query);
 		?>
 		<div id="Icerik">
 			<div class="form-group" id="testOkutma">
 				<label style="float:left;">Bölüm:</label>
-				<select onchange="bolumSelection()" id="bolumSelectionID" class="form-control sel1">
+				<select onchange="comboBoxOnChange()" id="bolumSelectionID" class="form-control sel1">
 					<?php
 					while ($bolum = mysqli_fetch_array($bolum_result)) {
-						echo '<option>' . $bolum["bolumAdi"] . '</option>';
+						echo '<option>' . $bolum["bolumNo"] . ' - ' . $bolum["bolumAdi"] . '</option>';
 					}
 					?>
 				</select>
 
 				<label style="float:left;">Ders:</label>
-				<select class="form-control sel1">
-					<option>1</option>
-					<option>2</option>
+				<select id="dersSelectionID" class="form-control sel1">
+					<?php
+					while ($select_Ders = mysqli_fetch_array($ders_result)) {
+						echo '<option>' . $select_Ders["bolumNo"] . ' - ' . $select_Ders["dersAdi"] . '</option>';
+					}
+					?>
 				</select>
 
 				<label style="float:left;">Sınav:</label>
@@ -78,7 +108,7 @@
 
 				<label style="float:left;">Cevap Anahtarı:</label>
 				<div class="custom-file sel1">
-					<input type="file" onchange='cevapAnahtari(this)'/>
+					<input type="file" onchange='cevapAnahtari(this)' />
 					<div id="isim"></div>
 					<div id="soyisim"></div>
 					<div id="numara"></div>
@@ -90,6 +120,6 @@
 			</div>
 		</div>
 	</div>
-
 </body>
+
 </html>

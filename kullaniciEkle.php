@@ -13,7 +13,29 @@
   <link href="table.css" rel="stylesheet">
 
   <title>Kullanıcılar</title>
-
+  <?php
+  include "dataBaseInfo.php";
+  if (isset($_POST["sicilNo"])) {
+    $control=False;
+    $sicilNo = $_POST["sicilNo"];
+    $adi = $_POST["adi"];
+    $soyadi = $_POST["soyadi"];
+    $sifre = $_POST["sifre"];
+    $control_query = "select sicilNo from ogretimUye";
+    $control_ogretimUye = $conn->query($control_query);
+    while ($control_uyeler = mysqli_fetch_array($control_ogretimUye)) {
+      if ($control_uyeler["sicilNo"] == $sicilNo) {
+        echo '<script>alert("Bu sicil Numarasına sahip bir öğretim görevlisi zaten mevcut.")</script>';
+        $control=True;
+      }
+    }
+    if(!$control)
+    {
+      $insert_query = "insert into ogretimUye(sicilNo,adi,soyadi,sifre) values ($sicilNo,'$adi','$soyadi','$sifre');";
+      $insert = $conn->query($insert_query);
+    }
+  }
+  ?>
   <!-- Bootstrap core CSS -->
 
 
@@ -21,11 +43,10 @@
 
 </head>
 
-<body>
-  <div id="TumSayfa">
+<body onresize="test()" onLoad="yenile()">
+  <div id="TumSayfa" onClick="kapat()">
     <?php
     include "leftMenu.php";
-    include "dataBaseInfo.php";
     $conn = new mysqli($servername, $user, $pass, $dbname);
     $query = "select * from ogretimUye;";
     $ogretimUyeleri = $conn->query($query);
@@ -71,7 +92,7 @@
               <button onclick="userEdit(' . $ogretimUye["sicilNo"] . ',`' . ($ogretimUye["adi"]) . '`,`' . $ogretimUye["soyadi"] . '`,`' . $ogretimUye["sifre"] . '`)" type="submit" data-target="#myModalUserEdit" data-toggle="modal" class="item" data-placement="top" title="Güncelle" data-original-title="Edit">
                 <i class="zmdi zmdi-edit"></i>
               </button>
-          <button onclick="deleteUser('.$ogretimUye["sicilNo"].',`'.$ogretimUye["adi"].'`,`'.$ogretimUye["soyadi"].'`)" data-target="#myModalDeleteUser" data-toggle="modal" class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
+          <button onclick="deleteUser(' . $ogretimUye["sicilNo"] . ',`' . $ogretimUye["adi"] . '`,`' . $ogretimUye["soyadi"] . '`)" data-target="#myModalDeleteUser" data-toggle="modal" class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
             <i class="zmdi zmdi-delete"></i>
           </button>
         </div>
@@ -92,8 +113,8 @@
                     document.getElementById("soyadiID").value = soyadi;
                     document.getElementById("sifreID").value = sifre;
                   }
-                  function deleteUser(sicilNo,adi,soyadi)
-                  {
+
+                  function deleteUser(sicilNo, adi, soyadi) {
                     document.getElementById("deleteUserID").value = sicilNo;
                     document.getElementById("whichUserName").innerHTML = adi + " " + soyadi;
                   }
@@ -117,22 +138,22 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="insertUser.php" method="post">
+          <form action="kullaniciEkle.php" method="post">
             <div class="form-group">
               <label><b>Sicil No:</b></label>
-              <input type="text" class="form-control" name="sicilNo">
+              <input type="text" class="form-control" name="sicilNo" required>
             </div>
             <div class="form-group">
               <label><b>Adı:</b></label>
-              <input type="text" class="form-control" name="adi">
+              <input type="text" class="form-control" name="adi" required>
             </div>
             <div class="form-group">
               <label><b>Soyadı:</b></label>
-              <input type="text" class="form-control" name="soyadi">
+              <input type="text" class="form-control" name="soyadi" required>
             </div>
             <div class="form-group">
               <label><b>Şifre:</b></label>
-              <input type="text" class="form-control" name="sifre">
+              <input type="text" class="form-control" name="sifre" required>
             </div>
             <button type="submit" class="btn btn-primary">Ekle</button>
           </form>
@@ -157,19 +178,19 @@
             <div class="form-group">
               <label><b>Sicil No:</b></label>
               <input id="oldsicilNoID" type="hidden" class="form-control" name="oldsicilNo" value="">
-              <input id="sicilNoID" type="text" class="form-control" name="sicilNo">
+              <input id="sicilNoID" type="text" class="form-control" name="sicilNo" required>
             </div>
             <div class="form-group">
               <label><b>Adı:</b></label>
-              <input id="adiID" type="text" class="form-control" name="adi">
+              <input id="adiID" type="text" class="form-control" name="adi" required>
             </div>
             <div class="form-group">
               <label><b>Soyadı:</b></label>
-              <input id="soyadiID" type="text" class="form-control" name="soyadi">
+              <input id="soyadiID" type="text" class="form-control" name="soyadi" required>
             </div>
             <div class="form-group">
               <label><b>Şifre:</b></label>
-              <input id="sifreID" type="text" class="form-control" name="sifre">
+              <input id="sifreID" type="text" class="form-control" name="sifre" required>
             </div>
             <button type="submit" class="btn btn-primary">Kaydet</button>
           </form>
@@ -188,18 +209,19 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-        <label id="whichUserName"></label>
-         adlı kullanıcıyı silmek istediğinize emin misiniz?
+          <label id="whichUserName"></label>
+          adlı kullanıcıyı silmek istediğinize emin misiniz?
           <form action="deleteUser.php" method="post">
             <button type="submit" class="btn btn-danger">Evet</button>
             <input id="deleteUserID" type="hidden" class="form-control" name="sicilNo" value="">
           </form>
-          <form> 
-              <button type="close" class="btn btn-info">Hayır</button>
+          <form>
+            <button type="close" class="btn btn-info">Hayır</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 </body>
+
 </html>
