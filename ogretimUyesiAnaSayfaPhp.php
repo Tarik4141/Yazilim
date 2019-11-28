@@ -79,7 +79,7 @@ if (isset($_POST["dersAdiName"]) && isset($_POST["bolumAdiName"])) {
 		<h3 style="text-align:center; padding-top:60px; z-index:3;">OPTİK OKUTUCU</h3>
 		<div class="form-group" id="testOkutma">
 
-			<label id="bolumID"><?php echo '<div class=form-group" id="' . $bolumAdi .'">'; ?></label>
+			<label id="bolumID"><?php echo "$bolumAdi"; ?></label>
 			<br>
 			<label id="dersID"><?php echo "$dersAdi"; ?></label>
 			<br>
