@@ -12,19 +12,41 @@
     <link href="css.css" rel="stylesheet">
     <link href="table.css" rel="stylesheet">
     <title>Fakülteler</title>
+    <?php
+    include "dataBaseInfo.php";
+    $kod_kontrol;
+    if (isset($_POST['fakulteNo'])) {
+        $control=false;
+        $fakulteNo=$_POST["fakulteNo"];
+        $fakulteAdi = $_POST['fakulteAdi'];
 
+        $control_query = "select * from fakulte";
+        $controlEt=$conn->query($control_query);
+        while($fakulteler = mysqli_fetch_array($controlEt))
+        {
+            if($fakulteler["fakulteNo"] == $fakulteNo)
+            {
+                echo '<script>alert("Bu kodlu bir fakülte zaten mevcut.")</script>';
+                $control=True;
+            }
+        }
+        if(!$control)
+        {
+            $insert_query="insert into fakulte(fakulteNo,fakulteAdi) values ($fakulteNo,'$fakulteAdi');";
+            $insert = $conn->query($insert_query);
+        }
+    } 
+    ?>
     <!-- Bootstrap core CSS -->
-
 
     <!-- Custom styles for this template -->
 
 </head>
 
-<body>
-    <div id="TumSayfa">
+<body onresize="test()" onLoad="yenile()">
+    <div id="TumSayfa" onClick="kapat()">
         <?php
         include "leftMenu.php";
-        include "dataBaseInfo.php";
         $conn = new mysqli($servername, $user, $pass, $dbname);
         $query = "select fakulteNo,fakulteAdi,(select GROUP_CONCAT(bolumAdi SEPARATOR ' - ') as Bolumler from bolum where fakulteNo=fakulte.fakulteNo) as departments from fakulte;";
         $result = $conn->query($query);
@@ -112,7 +134,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="insertFaculty.php" method="post">
+                    <form action="fakulteler.php" method="post">
                         <div class="form-group">
                             <label><b>Fakülte No:</b></label>
                             <input type="text" class="form-control" name="fakulteNo">

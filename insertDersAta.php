@@ -7,7 +7,7 @@ if(isset($_POST["ders"]) && isset($_POST["bolumAdi"])&&isset($_POST["ogretimUye"
     $ogretimUye_sicilNo = getCode($_POST["ogretimUye"]);
     $donemAdi = $_POST["donemAdi"];
 
-    $bolum_query = "select * from bolum where bolumAdi='$bolumAdi'";
+    $bolum_query = "select * from dersler where dersKodu='$dersKodu'";
     $bolum_result = $conn->query($bolum_query);
     $bolum = mysqli_fetch_array($bolum_result);
     $bolumNo = $bolum["bolumNo"];

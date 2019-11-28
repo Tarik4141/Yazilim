@@ -24,16 +24,16 @@
 		<?php
 		require_once 'Script.js';
 		?>
-		function ogrenciCevaplari(file)
-		{
+
+		function ogrenciCevaplari(file) {
 			readText(file);
 		}
-		function cevapAnahtari(file)
-		{
+
+		function cevapAnahtari(file) {
 			readCevapText(file);
 		}
-		function okutBtnClick()
-		{
+
+		function okutBtnClick() {
 			cevaplariOkut();
 		}
 	</script>
@@ -42,9 +42,9 @@
 		include "dataBaseInfo.php";
 		include "leftMenu.php";
 		echo $leftMenu;
-		$bolum_query = "select * from bolum;";
+		$bolum_query = "select bolumNo,bolumAdi from bolum;";
 		$bolum_result = $conn->query($bolum_query);
-		$ders_query = "select * from dersAtama;";
+		$ders_query = "select dersKodu,(select dersAdi from dersler where dersKodu=dersAtama.dersKodu) as dersAdi from dersAtama;";
 		$ders_result = $conn->query($ders_query);
 		?>
 		<div id="Icerik">
@@ -53,15 +53,18 @@
 				<select onchange="bolumSelection()" id="bolumSelectionID" class="form-control sel1">
 					<?php
 					while ($bolum = mysqli_fetch_array($bolum_result)) {
-						echo '<option>' . $bolum["bolumAdi"] . '</option>';
+						echo '<option>' . $bolum["bolumNo"] . ' - ' . $bolum["bolumAdi"] . '</option>';
 					}
 					?>
 				</select>
 
 				<label style="float:left;">Ders:</label>
 				<select class="form-control sel1">
-					<option>1</option>
-					<option>2</option>
+					<?php
+					while ($select_Ders = mysqli_fetch_array($ders_result)) {
+						echo '<option>' . $select_Ders["dersKodu"] . ' - ' . $select_Ders["dersAdi"] . '</option>';
+					}
+					?>
 				</select>
 
 				<label style="float:left;">Sınav:</label>
@@ -78,7 +81,7 @@
 
 				<label style="float:left;">Cevap Anahtarı:</label>
 				<div class="custom-file sel1">
-					<input type="file" onchange='cevapAnahtari(this)'/>
+					<input type="file" onchange='cevapAnahtari(this)' />
 					<div id="isim"></div>
 					<div id="soyisim"></div>
 					<div id="numara"></div>
@@ -92,4 +95,5 @@
 	</div>
 
 </body>
+
 </html>

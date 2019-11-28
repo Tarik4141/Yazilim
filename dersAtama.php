@@ -19,9 +19,22 @@
 
   <!-- Custom styles for this template -->
 </head>
+<script>
+  function dersAtaSelectBolumChange() {
+    
+  }
 
-<body>
-  <div id="TumSayfa">
+  function dersleriListele() {
+    document.getElementById("dersAtaDerslerID").options.length = 0;
+    var x = document.getElementById("dersAtaDerslerID");
+    var option = document.createElement("option");
+    option.text = "Dersler";
+    x.add(option);
+  }
+</script>
+
+<body onresize="test()" onLoad="yenile()">
+  <div id="TumSayfa" onClick="kapat()">
     <?php
     include "dataBaseInfo.php";
     include "leftMenu.php";
@@ -75,10 +88,10 @@
                           <td>' . $atananDersler["donemAdi"] . '</td>
                           <td>
                             <div class="table-data-feature">
-                              <button onclick="editDers(`' . $atananDersler["dersKodu"] . '`,`' . $atananDersler["dersAdi"] . '`,`' . $atananDersler["bolumAdi"] . '`,`' .$atananDersler["sicilNo"] .' - ' .$atananDersler["adi"] . '`,`' . $atananDersler["donemAdi"] . '`)" data-toggle="modal" data-target="#modalEditDersAta" class="item" data-toggle="tooltip" data-placement="top" title="Güncelle" data-original-title="Edit">
+                              <button onclick="editDers(`' . $atananDersler["dersKodu"] . '`,`' . $atananDersler["dersAdi"] . '`,`' . $atananDersler["bolumAdi"] . '`,`' . $atananDersler["sicilNo"] . ' - ' . $atananDersler["adi"] . '`,`' . $atananDersler["donemAdi"] . '`)" data-toggle="modal" data-target="#modalEditDersAta" class="item" data-toggle="tooltip" data-placement="top" title="Güncelle" data-original-title="Edit">
                                 <i class="zmdi zmdi-edit"></i>
                               </button>
-                              <button onclick="deleteDers(`'.$atananDersler["dersKodu"].'`,`'.$atananDersler["dersAdi"].'`)" data-toggle="modal" data-target="#modalDeleteAtananDers" class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
+                              <button onclick="deleteDers(`' . $atananDersler["dersKodu"] . '`,`' . $atananDersler["dersAdi"] . '`)" data-toggle="modal" data-target="#modalDeleteAtananDers" class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
                                 <i class="zmdi zmdi-delete"></i>
                               </button>
                             </div>
@@ -95,8 +108,8 @@
                     document.getElementById("ogretimUyeSelectID").value = ogretimUye;
                     document.getElementById("donemSelectID").value = donem;
                   }
-                  function deleteDers(dersKodu,dersAdi)
-                  {
+
+                  function deleteDers(dersKodu, dersAdi) {
                     document.getElementById("whichLecture").innerHTML = dersAdi;
                     document.getElementById("deleteAtananDersID").value = dersKodu;
                   }
@@ -122,7 +135,7 @@
           <form action="insertDersAta.php" method="post">
             <div class="form-group">
               <label>Ders Kodu - Adı:</label>
-              <select class="form-control" name="ders">
+              <select class="form-control" name="ders" id="dersAtaDerslerID">
                 <?php
                 while ($dersler = mysqli_fetch_array($dersler_result)) {
                   echo '<option>' . $dersler["dersKodu"] . " - " . $dersler["dersAdi"] . '</option>';
@@ -132,7 +145,7 @@
             </div>
             <div class="form-group">
               <label>Bölümü:</label>
-              <select class="form-control" name="bolumAdi">
+              <select class="form-control" name="bolumAdi" id="dersAtaBolumID" onchange="dersAtaSelectBolumChange()">
                 <?php
                 while ($bolumler = mysqli_fetch_array($bolumler_result)) {
                   echo '<option>' . $bolumler["bolumAdi"] . '</option>';

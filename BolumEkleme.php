@@ -12,6 +12,36 @@
   <link href="css.css" rel="stylesheet">
   <link href="table.css" rel="stylesheet">
   <title>BÖLÜMLER</title>
+  <?php
+    include "dataBaseInfo.php";
+    if (isset($_POST['fakulteAdi']) && isset($_POST['bolumNo']) && isset($_POST['bolumAdi'])) {
+        $control=false; 
+        $fakulteAdi = $_POST['fakulteAdi'];
+        $bolumNo = $_POST['bolumNo'];
+        $bolumAdi = $_POST['bolumAdi'];
+        $bolumKazanim = $_POST['bolumKazanim'];
+        $fakulteNo_query = "select * from fakulte where fakulteAdi = '$fakulteAdi'";
+        $fakulteNo_result = $conn->query($fakulteNo_query);
+        $fakulte = mysqli_fetch_array($fakulteNo_result);
+        $fakulteNo = $fakulte['fakulteNo'];
+        $bolumNo = $fakulteNo . $bolumNo;
+        $control_query = "select bolumNo from bolum";
+        $control_bolum = $conn->query($control_query);
+        while($control_bolumNo = mysqli_fetch_array($control_bolum))
+        {
+            if($control_bolumNo["bolumNo"] == $bolumNo)
+            {
+                echo '<script>alert("Bu bölüm numarasına sahip bir bölüm zaten mevcut.");</script>';
+                $control=True;
+            }
+        }
+        if(!$control){
+          $add_query = "insert into bolum(fakulteNo,bolumNo,bolumAdi,bolumKazanim) values ($fakulteNo,$bolumNo,'$bolumAdi','$bolumKazanim');";
+          $result = $conn->query($add_query);
+        }
+
+    } 
+    ?>
 
   <!-- Bootstrap core CSS -->
 
@@ -20,12 +50,10 @@
 
 </head>
 
-<body>
-  <div id="TumSayfa">
+<body onresize="test()" onLoad="yenile()">
+  <div id="TumSayfa" onClick="kapat()">
     <?php
     include "leftMenu.php";
-    include "dataBaseInfo.php";
-    $conn = new mysqli($servername, $user, $pass, $dbname);
     $query = "select bolumNo,bolumAdi,bolumKazanim,(select fakulteAdi from fakulte where fakulteNo = bolum.fakulteNo) as fakulteAdi from bolum";
     $result = $conn->query($query);
     echo $leftMenu;
@@ -117,7 +145,7 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="insertDepartment.php" method="post">
+          <form action="BolumEkleme.php" method="post">
             <div class="form-group">
               <label><b>Bölüm No:</b></label>
               <input type="text" class="form-control" name="bolumNo">

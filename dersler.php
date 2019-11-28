@@ -12,10 +12,38 @@
   <link href="css.css" rel="stylesheet">
   <link href="table.css" rel="stylesheet">
   <title>DERSLER</title>
+  <?php
+  include "dataBaseInfo.php";
+  if (isset($_POST['dersKodu']) && isset($_POST["dersAdi"]) && isset($_POST["bolumAdi"])) {
+    $control=false;
+    $dersKodu = $_POST["dersKodu"];
+    $dersAdi = $_POST["dersAdi"];
+    $bolumAdi = $_POST["bolumAdi"];
+    $bolum_query = "select * from bolum where bolumAdi='$bolumAdi'";
+    $bolum_result = $conn->query($bolum_query);
+    $bolum = mysqli_fetch_array($bolum_result);
+    $bolumNo = $bolum["bolumNo"];
+    $dersKazanim = $_POST["dersKazanim"];
+    $dersKodu = strval($bolumNo) . $dersKodu;
+
+    $control_query = "select dersKodu from dersler";
+    $control_dersler = $conn->query($control_query);
+    while ($control_dersKodu = mysqli_fetch_array($control_dersler)) {
+      if (strcmp($control_dersKodu["dersKodu"], $dersKodu) == 0) {
+        echo '<script>alert("Bu koda ait bir ders zaten mevcut.");</script>';
+        $control = true;
+      }
+      if (!$control) {
+        $insert_query = "insert into dersler(dersKodu,dersAdi,bolumNo,dersKazanim) values ('$dersKodu','$dersAdi',$bolumNo,'$dersKazanim');";
+        $insert = $conn->query($insert_query);
+      }
+    }
+  }
+  ?>
 </head>
 
-<body>
-  <div id="TumSayfa">
+<body onresize="test()" onLoad="yenile()">
+  <div id="TumSayfa" onClick="kapat()">
     <?php
     include "leftMenu.php";
     include "dataBaseInfo.php";
@@ -55,16 +83,16 @@
                           <td class="status--process">' . $ders["dersAdi"] . '</td>
                           <td>' . $ders["bolumAdi"] . '</td>
                           <td>
-                            <button onclick="showKazanim(`'.$ders["dersKazanim"].'`)" class="au-btn au-btn-icon au-btn--darkseagreen au-btn--small" data-toggle="modal" data-target="#modalDersKazanim">
+                            <button onclick="showKazanim(`' . $ders["dersKazanim"] . '`)" class="au-btn au-btn-icon au-btn--darkseagreen au-btn--small" data-toggle="modal" data-target="#modalDersKazanim">
                               Göster
                             </button>
                           </td>
                           <td>
                             <div class="table-data-feature">
-                              <button onclick="lectureEdit(`'.$ders["dersKodu"].'`,`'.$ders["dersAdi"].'`,`'.$ders["bolumAdi"].'`,`'.$ders["dersKazanim"].'`)" data-toggle="modal" data-target="#modalLectureEdit" class="item" data-toggle="tooltip" data-placement="top" title="Güncelle" data-original-title="Edit">
+                              <button onclick="lectureEdit(`' . $ders["dersKodu"] . '`,`' . $ders["dersAdi"] . '`,`' . $ders["bolumAdi"] . '`,`' . $ders["dersKazanim"] . '`)" data-toggle="modal" data-target="#modalLectureEdit" class="item" data-toggle="tooltip" data-placement="top" title="Güncelle" data-original-title="Edit">
                                 <i class="zmdi zmdi-edit"></i>
                               </button>
-                              <button onclick="deleteLecture(`'.$ders["dersKodu"].'`,`'.$ders["dersAdi"].'`)" data-toggle="modal" data-target="#modalDeleteLecture" class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
+                              <button onclick="deleteLecture(`' . $ders["dersKodu"] . '`,`' . $ders["dersAdi"] . '`)" data-toggle="modal" data-target="#modalDeleteLecture" class="item" data-toggle="tooltip" data-placement="top" title="Sil" data-original-title="Delete">
                                 <i class="zmdi zmdi-delete"></i>
                               </button>
                             </div>
@@ -74,8 +102,8 @@
                 }
                 ?>
                 <script>
-                  function lectureEdit(dersKodu, dersAdi, bolumAdi,dersKazanim) {
-                    getLecture(dersKodu, dersAdi, bolumAdi,dersKazanim);
+                  function lectureEdit(dersKodu, dersAdi, bolumAdi, dersKazanim) {
+                    getLecture(dersKodu, dersAdi, bolumAdi, dersKazanim);
                   }
 
                   function getLecture(dersKodu, dersAdi, bolumAdi, dersKazanim) {
@@ -86,10 +114,11 @@
                     document.getElementById("dersKazanimID").value = dersKazanim;
                   }
 
-                  function deleteLecture(dersKodu,dersAdi) {
+                  function deleteLecture(dersKodu, dersAdi) {
                     document.getElementById("deleteLectureID").value = dersKodu;
                     document.getElementById("whichLecture").innerHTML = dersAdi;
                   }
+
                   function showKazanim(kazanim) {
                     document.getElementById("showDersKazanimID").innerHTML = kazanim;
                   }
@@ -112,7 +141,7 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="insertLecture.php" method="post">
+          <form action="dersler.php" method="post">
             <div class="form-group">
               <label><b>Ders Kodu:</b></label>
               <input type="text" class="form-control" name="dersKodu">

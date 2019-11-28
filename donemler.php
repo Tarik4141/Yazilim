@@ -11,7 +11,29 @@
     <script type="text/javascript" language="javascript" src="Script.js"></script>
     <link href="css.css" rel="stylesheet">
     <link href="table.css" rel="stylesheet">
-    <title>Fakülteler</title>
+    <title>Donemler</title>
+    <?php
+    include "dataBaseInfo.php";
+    if (isset($_POST['donemId'])) {
+        $control=false;
+        $donemId = $_POST["donemId"];
+        $donemAdi = $_POST["donemAdi"];
+        $control_query = "select donemId from donem";
+        $control_donem = $conn->query($control_query);
+        while ($control_donemID = mysqli_fetch_array($control_donem)) {
+            if ($control_donemID["donemId"] == $donemId) {
+                echo '<script>alert("Bu donem Koduna ait bir dönem zaten mevcutç")</script>';
+                $control=true;
+            }
+        }
+        if(!$control)
+        {
+            $insert_query = "insert into donem(donemId,donemAdi) values ($donemId,'$donemAdi');";
+            $insert = $conn->query($insert_query);
+        }
+    }
+    ?>
+
 
     <!-- Bootstrap core CSS -->
 
@@ -20,12 +42,10 @@
 
 </head>
 
-<body>
-    <div id="TumSayfa">
+<body onresize="test()" onLoad="yenile()">
+    <div id="TumSayfa" onClick="kapat()">
         <?php
         include "leftMenu.php";
-        include "dataBaseInfo.php";
-        $conn = new mysqli($servername, $user, $pass, $dbname);
         $query = "select * from donem";
         $result = $conn->query($query);
         echo $leftMenu;
@@ -106,7 +126,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="insertDonem.php" method="post">
+                    <form action="donemler.php" method="post">
                         <div class="form-group">
                             <label><b>Dönem Kodu:</b></label>
                             <input type="text" class="form-control" name="donemId">

@@ -39,14 +39,25 @@
           if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
           }
-          $query = "select * from admins where kullaniciAdi = '$username' and sifre = '$password'";
-          $result = $conn->query($query);
-          $response = mysqli_fetch_assoc($result);
-          if ($result->num_rows > 0) {
+          $admin_query = "select * from admins where kullaniciAdi = '$username' and sifre = '$password'";
+          $ogretimUye_query = "select * from ogretimUye where sicilNo = $username and sifre = '$password'";
+          
+          $admin_result = $conn->query($admin_query);
+          $ogretimUye_result = $conn->query($ogretimUye_query);
+          
+          $admin_response = mysqli_fetch_assoc($admin_result);
+          $ogretimUye_response = mysqli_fetch_assoc($ogretimUye_result);
+          if ($admin_result->num_rows > 0) {
             session_start();
-            $_SESSION["glbAdmin"] = $response;
+            $_SESSION["glbAdmin"] = $admin_response;
             header("Location: anaSayfa.php");
-          } else {
+          } 
+          else if($ogretimUye_result->num_rows > 0){
+            session_start();
+            $_SESSION["glbogretimUye"] = $ogretimUye_response;
+            header("Location: ogretimUyesiDersBilgileriPhp.php");
+          }
+          else {
             echo '<div class="text-danger text-center">Hatalı Kullanıcı adi veya sifre</div>';
           }
         }
