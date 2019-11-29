@@ -72,6 +72,10 @@ function cevapAnahtariOlustur(text) {
 		cevaplar[i] = cevaplar[i].split(":");
 	}
 }
+function grupveCevaplar()
+{
+
+}
 
 function cevaplariOkut(adi) {
 	ogrenciBilgi = new Array();
