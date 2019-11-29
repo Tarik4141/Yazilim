@@ -129,11 +129,11 @@
                     <form action="donemler.php" method="post">
                         <div class="form-group">
                             <label><b>Dönem Kodu:</b></label>
-                            <input type="text" class="form-control" name="donemId">
+                            <input type="text" class="form-control" name="donemId" required>
                         </div>
                         <div class="form-group">
                             <label><b>Dönem Adı:</b></label>
-                            <input type="text" class="form-control" name="donemAdi">
+                            <input type="text" class="form-control" name="donemAdi" required>
                         </div>
                         <button type="submit" class="btn btn-info">Ekle</button>
                     </form>
@@ -156,12 +156,12 @@
                     <form action="editDonem.php" method="post">
                         <div class="form-group">
                             <label><b>Dönem No:</b></label>
-                            <input id="donemNoID" type="text" class="form-control" name="donemId">
+                            <input id="donemNoID" type="text" class="form-control" name="donemId" required>
                             <input id="oldDonemNoID" type="hidden" class="form-control" name="oldDonemId" value="">
                         </div>
                         <div class="form-group">
                             <label><b>Dönem Adı:</b></label>
-                            <input id="donemAdiID" type="text" class="form-control" name="donemAdi">
+                            <input id="donemAdiID" type="text" class="form-control" name="donemAdi" required>
                         </div>
                         <button type="submit" class="btn btn-info">Kaydet</button>
                     </form>

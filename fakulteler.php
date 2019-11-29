@@ -137,11 +137,11 @@
                     <form action="fakulteler.php" method="post">
                         <div class="form-group">
                             <label><b>Fakülte No:</b></label>
-                            <input type="text" class="form-control" name="fakulteNo">
+                            <input type="text" class="form-control" name="fakulteNo" required>
                         </div>
                         <div class="form-group">
                             <label><b>Fakülte Adı:</b></label>
-                            <input type="text" class="form-control" name="fakulteAdi">
+                            <input type="text" class="form-control" name="fakulteAdi" required>
                         </div>
                         <button type="submit" class="btn btn-danger">Ekle</button>
                     </form>
@@ -164,7 +164,7 @@
                     <form action="editFaculty.php" method="post">
                         <div class="form-group">
                             <label><b>Fakülte No:</b></label>
-                            <input id="fakulteNoID" type="text" class="form-control" name="fakulteNo">
+                            <input id="fakulteNoID" type="text" class="form-control" name="fakulteNo" required>
                             <input id="oldfakulteNoID" type="hidden" class="form-control" name="oldfakulteNo" value="">
                         </div>
                         <div class="form-group">

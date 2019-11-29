@@ -144,11 +144,11 @@
           <form action="dersler.php" method="post">
             <div class="form-group">
               <label><b>Ders Kodu:</b></label>
-              <input type="text" class="form-control" name="dersKodu">
+              <input type="text" class="form-control" name="dersKodu" required>
             </div>
             <div class="form-group">
               <label><b>Ders Adı:</b></label>
-              <input type="text" class="form-control" name="dersAdi">
+              <input type="text" class="form-control" name="dersAdi" required>
             </div>
             <div class="form-group">
               <label>Bölüm:</label>
@@ -164,7 +164,7 @@
             </div>
             <div class="form-group">
               <label><b>Kazanımları:</b></label>
-              <textarea class="md-textarea form-control" rows="8" name="dersKazanim"></textarea>
+              <textarea class="md-textarea form-control" rows="8" name="dersKazanim" required></textarea>
             </div>
             <button type="submit" class="btn btn-info">Ekle</button>
           </form>
@@ -188,12 +188,12 @@
           <form action="editLecture.php" method="post">
             <div class="form-group">
               <label><b>Ders Kodu:</b></label>
-              <input id="dersKoduID" type="text" class="form-control" name="dersKodu">
+              <input id="dersKoduID" type="text" class="form-control" name="dersKodu" required>
               <input id="oldDersKoduID" type="hidden" class="form-control" name="oldDersKodu" value="">
             </div>
             <div class="form-group">
               <label><b>Ders Adı:</b></label>
-              <input id="dersAdiID" type="text" class="form-control" name="dersAdi">
+              <input id="dersAdiID" type="text" class="form-control" name="dersAdi" required>
             </div>
             <div class="form-group">
               <label>Bölüm:</label>
@@ -233,7 +233,7 @@
           adlı dersi silmek istediğinize emin misiniz ?
           <form action="deleteLecture.php" method="post">
             <button type="submit" class="btn btn-danger">Evet</button>
-            <input id="deleteLectureID" type="hidden" class="form-control" name="dersKodu" value="">
+            <input id="deleteLectureID" type="hidden" class="form-control" name="dersKodu" value="" >
           </form>
           <form>
             <button type="close" class="btn btn-info">Hayır</button>

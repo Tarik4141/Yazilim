@@ -141,19 +141,19 @@
           <form action="kullaniciEkle.php" method="post">
             <div class="form-group">
               <label><b>Sicil No:</b></label>
-              <input type="text" class="form-control" name="sicilNo">
+              <input type="text" class="form-control" name="sicilNo" required>
             </div>
             <div class="form-group">
               <label><b>Adı:</b></label>
-              <input type="text" class="form-control" name="adi">
+              <input type="text" class="form-control" name="adi" required>
             </div>
             <div class="form-group">
               <label><b>Soyadı:</b></label>
-              <input type="text" class="form-control" name="soyadi">
+              <input type="text" class="form-control" name="soyadi" required>
             </div>
             <div class="form-group">
               <label><b>Şifre:</b></label>
-              <input type="text" class="form-control" name="sifre">
+              <input type="text" class="form-control" name="sifre" required>
             </div>
             <button type="submit" class="btn btn-primary">Ekle</button>
           </form>
@@ -178,19 +178,19 @@
             <div class="form-group">
               <label><b>Sicil No:</b></label>
               <input id="oldsicilNoID" type="hidden" class="form-control" name="oldsicilNo" value="">
-              <input id="sicilNoID" type="text" class="form-control" name="sicilNo">
+              <input id="sicilNoID" type="text" class="form-control" name="sicilNo" required>
             </div>
             <div class="form-group">
               <label><b>Adı:</b></label>
-              <input id="adiID" type="text" class="form-control" name="adi">
+              <input id="adiID" type="text" class="form-control" name="adi" required>
             </div>
             <div class="form-group">
               <label><b>Soyadı:</b></label>
-              <input id="soyadiID" type="text" class="form-control" name="soyadi">
+              <input id="soyadiID" type="text" class="form-control" name="soyadi" required>
             </div>
             <div class="form-group">
               <label><b>Şifre:</b></label>
-              <input id="sifreID" type="text" class="form-control" name="sifre">
+              <input id="sifreID" type="text" class="form-control" name="sifre" required>
             </div>
             <button type="submit" class="btn btn-primary">Kaydet</button>
           </form>

@@ -72,7 +72,7 @@
                 <tr>
                   <th>Ders Adı</th>
                   <th>Bölümü</th>
-                  <th>Öğretim Görevlisi</th>
+                  <th>Öğretmen</th>
                   <th>Dönemi</th>
                   <th>Düzenle</th>
                 </tr>
@@ -193,7 +193,7 @@
           <form action="editDersAta.php" method="post">
             <div class="form-group">
               <label id="whichDers"></label> adlı dersi Düzenliyorsunuz.
-              <input type="hidden" id="dersKoduID" name="dersKodu" value="">
+              <input type="hidden" id="dersKoduID" name="dersKodu" value="" required>
             </div>
             <div class="form-group">
               <label>Bölümü:</label>

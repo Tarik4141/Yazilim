@@ -148,11 +148,11 @@
           <form action="BolumEkleme.php" method="post">
             <div class="form-group">
               <label><b>Bölüm No:</b></label>
-              <input type="text" class="form-control" name="bolumNo">
+              <input type="text" class="form-control" name="bolumNo" required>
             </div>
             <div class="form-group">
               <label><b>Bölüm Adı:</b></label>
-              <input type="text" class="form-control" name="bolumAdi">
+              <input type="text" class="form-control" name="bolumAdi" required>
             </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Fakülte:</label>
@@ -168,7 +168,7 @@
             </div>
             <div class="form-group">
               <label><b>Kazanımları:</b></label>
-              <textarea id="bolumKazanimID" class="md-textarea form-control" rows="8" name = "bolumKazanim"></textarea>
+              <textarea id="bolumKazanimID" class="md-textarea form-control" rows="8" name = "bolumKazanim" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Ekle</button>
           </form>
@@ -193,11 +193,11 @@
             <div class="form-group">
               <label><b>Bölüm No:</b></label>
               <input id="oldBolumNoID" type="hidden" class="form-control" name="oldBolumNo" value="">
-              <input id="bolumNoID" type="text" class="form-control" name="bolumNo">
+              <input id="bolumNoID" type="text" class="form-control" name="bolumNo" required>
             </div>
             <div class="form-group">
               <label><b>Bölüm Adı:</b></label>
-              <input id="bolumAdiID" type="text" class="form-control" name="bolumAdi">
+              <input id="bolumAdiID" type="text" class="form-control" name="bolumAdi" required>
             </div>
             <div class="form-group">
               <label>Fakülte:</label>
