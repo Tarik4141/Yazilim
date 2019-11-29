@@ -22,10 +22,10 @@ $leftMenu = '<div id="Header">
   
            <a class="list-group-item "  style="padding:15px;">
                 <img src="avatar5.png" alt="kullanıcıLogo" class="img-circle" style="max-width:33px;  margin:5px; border-radius:50%;">
-              <span class="brand-text font-weight-light" style="vertical-align:middle;">' . $_SESSION['glbAdmin']['kullaniciAdi'] . '</span>
+              <span class="brand-text font-weight-light" style="vertical-align:middle;">' . $_SESSION['glbAdmin']['kullaniciAdi'] .'</span>
           </a>
   
-         <a href="anaSayfa.php" class="list-group-item list-group-item-action ek">Optik Okuyucu</a>
+         <a href="anaSayfa.php" class="list-group-item list-group-item-action ek">Test Okut</a>
          <a href="kullaniciEkle.php" class="list-group-item list-group-item-action ek">Kullanıcılar</a>
          <a href="BolumEkleme.php" class="list-group-item list-group-item-action ek">Bölümler</a>
          <a href="donemler.php" class="list-group-item list-group-item-action ek">Dönemler</a>

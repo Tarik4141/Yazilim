@@ -72,7 +72,7 @@
                 <tr>
                   <th>Ders Adı</th>
                   <th>Bölümü</th>
-                  <th>Öğretim Görevlisi</th>
+                  <th>Öğretmen</th>
                   <th>Dönemi</th>
                   <th>Düzenle</th>
                 </tr>
